@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Proxy - Access Any Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-mode">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>Ultra Proxy</h1>
+                </div>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="bookmarks-toggle" id="bookmarksToggle">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="bookmark-count" id="bookmarkCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- URL Input Section -->
+            <section class="url-section">
+                <div class="url-container">
+                    <div class="url-input-wrapper">
+                        <div class="url-input-group">
+                            <i class="fas fa-globe url-icon"></i>
+                            <input 
+                                type="url" 
+                                id="urlInput" 
+                                class="url-input" 
+                                placeholder="Enter any website URL (e.g., https://www.youtube.com)"
+                                autocomplete="off"
+                            >
+                            <button class="go-button" id="goButton">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Go</span>
+                            </button>
+                        </div>
+                        <div class="url-suggestions" id="urlSuggestions"></div>
+                    </div>
+                    
+                    <div class="quick-access">
+                        <h3>Quick Access</h3>
+                        <div class="quick-links">
+                            <button class="quick-link" data-url="https://www.youtube.com">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </button>
+                            <button class="quick-link" data-url="https://www.google.com">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button class="quick-link" data-url="https://www.github.com">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </button>
+                            <button class="quick-link" data-url="https://www.stackoverflow.com">
+                                <i class="fab fa-stack-overflow"></i>
+                                <span>Stack Overflow</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Proxy Display Section -->
+            <section class="proxy-section" id="proxySection" style="display: none;">
+                <div class="proxy-header">
+                    <div class="proxy-info">
+                        <span class="current-url" id="currentUrl"></span>
+                        <div class="proxy-controls">
+                            <button class="control-btn" id="backButton" title="Go Back">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <button class="control-btn" id="forwardButton" title="Go Forward">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="control-btn" id="refreshButton" title="Refresh">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="control-btn" id="homeButton" title="Home">
+                                <i class="fas fa-home"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="proxy-actions">
+                        <button class="action-btn bookmark-btn" id="bookmarkBtn" title="Add to Bookmarks">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                        <button class="action-btn download-btn" id="downloadBtn" title="Download Media">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn fullscreen-btn" id="fullscreenBtn" title="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="proxy-frame-container">
+                    <iframe 
+                        id="proxyFrame" 
+                        class="proxy-frame" 
+                        frameborder="0"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            </section>
+
+            <!-- Welcome Section -->
+            <section class="welcome-section" id="welcomeSection">
+                <div class="welcome-content">
+                    <div class="welcome-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2>Welcome to Ultra Proxy</h2>
+                    <p>Access any website with zero lag, full interactivity, and seamless streaming support.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Zero Lag</h3>
+                            <p>Lightning-fast proxy with optimized performance</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Video Support</h3>
+                            <p>Full video playback including shorts and streams</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-virus"></i>
+                            <h3>Bypass Filters</h3>
+                            <p>Seamlessly bypass content filters and restrictions</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-bookmark"></i>
+                            <h3>Smart Bookmarks</h3>
+                            <p>Save and organize your favorite websites</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bookmarks Sidebar -->
+        <aside class="bookmarks-sidebar" id="bookmarksSidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-bookmark"></i> Bookmarks</h3>
+                <button class="close-sidebar" id="closeSidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="bookmarks-list" id="bookmarksList">
+                <!-- Bookmarks will be populated here -->
+            </div>
+            <div class="sidebar-footer">
+                <button class="clear-all-btn" id="clearAllBookmarks">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </aside>
+
+        <!-- Overlay for sidebar -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Loading website...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
